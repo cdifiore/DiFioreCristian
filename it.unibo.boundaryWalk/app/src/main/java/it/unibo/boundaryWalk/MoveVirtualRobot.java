@@ -63,15 +63,31 @@ public class MoveVirtualRobot {
     public boolean moveLeft(int duration)     { return sendCmd("turnLeft", duration);     }
     public boolean moveRight(int duration)    { return sendCmd("turnRight", duration);    }
     public boolean moveStop(int duration)     { return sendCmd("alarm", duration);        }
+
+    public String walkBoundary() {
+        String perimeter = "";
+        for (int i = 0; i < 4; i++) {
+            while (!this.moveForward(200))
+                perimeter += "w";
+            // System.out.println( "Collision and need to turn left");
+            this.moveLeft(300);
+            perimeter += "l";
+        }
+        return perimeter;
+    }
+
     /*
     MAIN
      */
-    public static void main(String[] args)   {
-        MoveVirtualRobot appl = new MoveVirtualRobot();
-        boolean moveFailed = appl.moveLeft(300);
-        System.out.println( "MoveVirtualRobot | moveLeft  failed= " + moveFailed);
-        moveFailed = appl.moveRight(1300);
-        System.out.println( "MoveVirtualRobot | moveRight failed= " + moveFailed);
-    }
+        public static void main (String[]args){
+            MoveVirtualRobot appl = new MoveVirtualRobot();
+//        boolean moveFailed = appl.moveLeft(300);
+//        System.out.println( "MoveVirtualRobot | moveLeft  failed= " + moveFailed);
+//        moveFailed = appl.moveRight(1300);
+//        System.out.println( "MoveVirtualRobot | moveRight failed= " + moveFailed);
+            String perimeter = "";
+            perimeter= appl.walkBoundary();
+            System.out.println(perimeter);
+        }
 
-}
+    }

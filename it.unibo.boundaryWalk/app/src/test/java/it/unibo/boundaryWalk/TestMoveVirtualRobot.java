@@ -21,7 +21,7 @@ public class TestMoveVirtualRobot {
         System.out.println("%%%  TestMoveVirtualRobot |  terminates ");
     }
 
-    @Test
+   @Test
     public void testMovesNoFailing() {
         System.out.println("TestMoveVirtualRobot | testWork ");
         boolean moveFailed = appl.moveLeft(300);
@@ -50,4 +50,10 @@ public class TestMoveVirtualRobot {
         assertTrue( moveFailed  );
     }
 
+    @Test
+    public void testWalkBoundary(){
+        System.out.println("TestMoveVirtualRobot | testWalkBoundary ");
+        String pattern="w*lw*lw*lw*l";
+        assertTrue(appl.walkBoundary().matches(pattern));
+    }
 }
