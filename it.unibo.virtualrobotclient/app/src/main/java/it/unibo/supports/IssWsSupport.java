@@ -5,15 +5,11 @@
  ===============================================================
  */
 package it.unibo.supports;
-
-import it.unibo.interaction.IssObserver;
 import org.json.JSONObject;
-
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 import java.security.Principal;
-import java.util.Vector;
 
 /**
  IssWsSupport.java
@@ -81,7 +77,8 @@ public class IssWsSupport extends IssObservableCommSupport implements IssCommSup
                 //String distance  = jsonObj.get("distance").toString();
                 //System.out.println("        IssWsSupport | onMessage sonarName=" + sonarName + " distance=" + distance);
             }
-            updateObservers( jsonObj );
+            updateObservers( jsonObj );  //Requires time to update all ...
+            //Why we must wait for the execution of all the observers?
         } catch (Exception e) {
             System.out.println("        IssWsSupport | onMessage ERROR " + e.getMessage());
 
