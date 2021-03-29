@@ -8,8 +8,8 @@ configuration file IssProtocolConfig.txt
 ===============================================================
 */
 package it.unibo.robotWithActorJava;
-
 import it.unibo.consolegui.ConsoleGuiActor;
+import it.unibo.supports2021.ActorBasicJava;
 import it.unibo.supports2021.IssWsHttpJavaSupport;
 
 public class MainRobotActorJava {
@@ -26,7 +26,6 @@ public class MainRobotActorJava {
 
         ConsoleGuiActor console = new ConsoleGuiActor();
         console.registerActor(ra);
-        console.registerActor(new NaiveObserverActor("naiveObs") );
 
         ra.send("startApp");
 

@@ -41,16 +41,10 @@ Hhandler of the messages sent by WENv over the cmdsocket-8091 to notify:
      */
     @Override
     public synchronized void  handleInfo(JSONObject infoJson) {
-        System.out.println("RobotInputController | handleInfo:" + infoJson  );
+        //System.out.println("RobotInputController | handleInfo:" + infoJson  );
         if( infoJson.has("endmove") )        handleEndMove(infoJson);
-        else if( infoJson.has("robotcmd"))   handleGUI(infoJson);
         else if( infoJson.has("sonarName") ) handleSonar(infoJson);
         else if( infoJson.has("collision") ) handleCollision(infoJson);
-    }
-
-    private void handleGUI(JSONObject infoJson) {
-        String guiInput = (String) infoJson.get("robotcmd");
-        robotBehaviorLogic.stopAndResume(guiInput);
     }
 
     protected void handleSonar( JSONObject sonarinfo ){
@@ -69,7 +63,8 @@ Hhandler of the messages sent by WENv over the cmdsocket-8091 to notify:
         String move   = (String) endmove.get("move");   //moveForward, ...
         System.out.println("RobotInputController | handleEndMove:" + move + " answer=" + answer);
         switch( answer ){
-            case "true"       : robotBehaviorLogic.boundaryStep( move, false );break;
+            case "true"       : robotBehaviorLogic.boundaryStep( move, false );
+                                  break;
             case "false"      : robotBehaviorLogic.boundaryStep( move, true  );break;
             case "halted"     : System.out.println("RobotInputController | handleEndMove to do halt" );break;
             case "notallowed" : System.out.println("RobotInputController | handleEndMove to do notallowed" );break;
